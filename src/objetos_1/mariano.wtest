@@ -30,6 +30,9 @@ describe "tests de mariano" {
 //		assert.equals(4, caramelo.peso())
 		assert.equals(11, bombon.peso())
 	}
+	test "hay libre de Gluten?"{
+		assert.notThat(mariano.hayGolosinaSinTACC())		
+	}
 	
 }
 
