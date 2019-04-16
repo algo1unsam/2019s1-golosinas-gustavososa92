@@ -35,7 +35,7 @@ object mariano {
 
 	method golosinaDeSabor(unSabor) {
 		/*golosinaDeSabor(unSabor) : devuelve la primer golosina que encuentra en la bolsa del sabor escogido. */
-		return golosinas.find({ golosina => golosina.gusto() == unSabor })
+		return golosinas.findOrElse({ golosina => golosina.gusto() == unSabor }, { null })
 	}
 
 	method golosinasDeSabor(unSabor) {
@@ -53,10 +53,12 @@ object mariano {
 		return golosinas.max({ golosina => golosina.precio() })
 	}
 
-/*    
- *  	   
- *     pesoGolosinas() : devuelve el peso de la bolsa de golosinas compradas, o sea, la suma del peso de cada golosina.
+	method pesoGolosinas() {
+		/*pesoGolosinas() : devuelve el peso de la bolsa de golosinas compradas, o sea, la suma del peso de cada golosina. */
+		return golosinas.sum({ golosina => golosina.peso() })
+	}
 
+/*
  * Además, se deben contemplar dos situaciones relacionadas con Juliana, la pareja actual de Mariano.
 
  *     Juliana critica a Mariano, pero siempre que puede le quita alguna golosina si es de las que a ella le gusta, y se enoja por las que faltan.

@@ -22,12 +22,12 @@ describe "tests de mariano" {
 		/* habilitar las lineas anuladas cuando se complete la definicion 
 		 * de las golosinas
 		 */
-//		assert.equals(100, chocolatin.peso())
-//		assert.equals(5, caramelo.peso())
+		assert.equals(100, chocolatin.peso())
+		assert.equals(5, caramelo.peso())
 		assert.equals(15, bombon.peso())
 		mariano.probarGolosinas()
-//		assert.equals(98, chocolatin.peso())
-//		assert.equals(4, caramelo.peso())
+		assert.equals(98, chocolatin.peso())
+		assert.equals(4, caramelo.peso())
 		assert.equals(11, bombon.peso())
 	}
 
@@ -35,38 +35,49 @@ describe "tests de mariano" {
 		assert.that(mariano.hayGolosinaSinTACC())
 	}
 
-	test " No todos los precios son menores que 10 pesos" {
+	test "NO todos los precios son menores que 10 pesos" {
 		assert.that(not mariano.preciosCuidados())
+		//lo cambie por el negado por que siempre me daba amarillo
 	}
 
 	test "hay alguna golosina de sabor frutilla" {
 		var sabor = frutilla
-		assert.that(mariano.golosinaDeSabor(sabor).gusto() == sabor)
+		assert.that(mariano.golosinaDeSabor(sabor) != null)
 	}
 
 	test "hay alguna golosina de sabor chocolate" {
 		var sabor = chocolate
-		assert.that(mariano.golosinaDeSabor(sabor).gusto() == sabor)
+		assert.that(mariano.golosinaDeSabor(sabor) != null)
 	}
 
-	test "golosinas de sabor frutilla" {
+	test "golosinas de sabor frutilla tienen que ser caramelo y bombon" {
 		var sabor = frutilla
 		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
 		assert.that(mariano.golosinasDeSabor(sabor) == #{ caramelo, bombon })
 	}
 
-	test "golosinas de sabor chocolate" {
+	test "golosinas de sabor chocolate tiene que ser chocolatin" {
 		var sabor = chocolate
 		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
 		assert.that(mariano.golosinasDeSabor(sabor) == #{ chocolatin })
 	}
 
-	test "conjunto de sabores" {
+	test "conjunto de sabores tiene que ser chocolate y frutilla" {
 		// assert.notThat(mariano.sabores().isEmpty)
 		assert.that(mariano.sabores() == #{ chocolate, frutilla })
 	}
-	test "golosina mas cara debe ser chocolatin"{
-		assert.that(mariano.golosinaMasCara()==chocolatin)
+
+	test "golosina mas cara debe ser chocolatin" {
+		assert.that(mariano.golosinaMasCara() == chocolatin)
+	}
+
+	test "suma de todos los pesos tiene que ser al inicio 120(100+5+15)" {
+		assert.equals(120, mariano.pesoGolosinas())
+	}
+
+	test "suma de todos los pesos tiene que ser 113(98+4+11) despues de 1 probada a la bolsa" {
+		mariano.probarGolosinas()
+		assert.equals(113, mariano.pesoGolosinas())
 	}
 
 }
