@@ -17,7 +17,7 @@ describe "tests de mariano" {
 		assert.that(mariano.golosinas().contains(bombon))
 		assert.notThat(mariano.golosinas().contains(chupetin))
 	}
-	
+
 	test "probar golosinas" {
 		/* habilitar las lineas anuladas cuando se complete la definicion 
 		 * de las golosinas
@@ -30,9 +30,44 @@ describe "tests de mariano" {
 //		assert.equals(4, caramelo.peso())
 		assert.equals(11, bombon.peso())
 	}
-	test "hay libre de Gluten?"{
-		assert.notThat(mariano.hayGolosinaSinTACC())		
+
+	test "hay libre de Gluten?" {
+		assert.that(mariano.hayGolosinaSinTACC())
 	}
-	
+
+	test " No todos los precios son menores que 10 pesos" {
+		assert.that(not mariano.preciosCuidados())
+	}
+
+	test "hay alguna golosina de sabor frutilla" {
+		var sabor = frutilla
+		assert.that(mariano.golosinaDeSabor(sabor).gusto() == sabor)
+	}
+
+	test "hay alguna golosina de sabor chocolate" {
+		var sabor = chocolate
+		assert.that(mariano.golosinaDeSabor(sabor).gusto() == sabor)
+	}
+
+	test "golosinas de sabor frutilla" {
+		var sabor = frutilla
+		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
+		assert.that(mariano.golosinasDeSabor(sabor) == #{ caramelo, bombon })
+	}
+
+	test "golosinas de sabor chocolate" {
+		var sabor = chocolate
+		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
+		assert.that(mariano.golosinasDeSabor(sabor) == #{ chocolatin })
+	}
+
+	test "conjunto de sabores" {
+		// assert.notThat(mariano.sabores().isEmpty)
+		assert.that(mariano.sabores() == #{ chocolate, frutilla })
+	}
+	test "golosina mas cara debe ser chocolatin"{
+		assert.that(mariano.golosinaMasCara()==chocolatin)
+	}
+
 }
 

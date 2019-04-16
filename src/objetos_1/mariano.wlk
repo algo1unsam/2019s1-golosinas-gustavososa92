@@ -1,3 +1,5 @@
+import golosinas.*
+
 object mariano {
 
 	var golosinas = #{}
@@ -27,25 +29,32 @@ object mariano {
 	}
 
 	method preciosCuidados() {
-	/*preciosCuidados() : indica si todas las golosinas compradas tienen un precio menor o igual a 10 pesos. */
+		/*preciosCuidados() : indica si todas las golosinas compradas tienen un precio menor o igual a 10 pesos. */
+		return golosinas.all({ golosina => golosina.precio() < 10 })
 	}
 
 	method golosinaDeSabor(unSabor) {
-	/*golosinaDeSabor(unSabor) : devuelve la primer golosina que encuentra en la bolsa del sabor escogido. */
+		/*golosinaDeSabor(unSabor) : devuelve la primer golosina que encuentra en la bolsa del sabor escogido. */
+		return golosinas.find({ golosina => golosina.gusto() == unSabor })
 	}
 
 	method golosinasDeSabor(unSabor) {
-	/*golosinasDeSabor(unSabor) : devuelve las golosinas que encuentre dentro de la bolsa del sabor escogido. */
+		/*golosinasDeSabor(unSabor) : devuelve las golosinas que encuentre dentro de la bolsa del sabor escogido. */
+		return golosinas.filter({ golosina => golosina.gusto() == unSabor })
 	}
 
 	method sabores() {
-	/*sabores() : que devuelve los sabores de las golosinas de la bolsa, idealmente sin repetidos. */
+		/*sabores() : que devuelve los sabores de las golosinas de la bolsa, idealmente sin repetidos. */
+		return golosinas.map({ golosina => golosina.gusto() }).asSet()
+	}
+
+	method golosinaMasCara() {
+		/*golosinaMasCara() : devuelve la golosina mas cara en la bolsa de golosinas compradas. */
+		return golosinas.max({ golosina => golosina.precio() })
 	}
 
 /*    
- *     P.ej. aunque Mariano tenga tres golosinas de sabor naranja, en lo que devuelve sabores() el naranja debería aparecer una sola vez.
- *     Una forma de resolver esto es usando conjuntos; revolver en el apunte sobre colecciones y closures: https://objetos1wollokunq.gitlab.io/material/guia-colecciones-basicas.pdf.
- *     golosinaMasCara() : devuelve la golosina mas cara en la bolsa de golosinas compradas.
+ *  	   
  *     pesoGolosinas() : devuelve el peso de la bolsa de golosinas compradas, o sea, la suma del peso de cada golosina.
 
  * Además, se deben contemplar dos situaciones relacionadas con Juliana, la pareja actual de Mariano.

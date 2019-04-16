@@ -3,7 +3,7 @@ object bombon {
 	
 	method precio() { return 5 }
 	method peso() { return peso }
-	method mordisco() { peso = peso * 0.8 - 1 }
+	method mordisco() { peso = (peso * 0.8 - 1).max(0) }
 	method gusto() { return frutilla }
 	method libreGluten() { return true }
 }
@@ -23,7 +23,7 @@ var peso = 5
 	
 	method precio() { return 1 }
 	method peso() { return peso }
-	method mordisco() { peso -=  1 }
+	method mordisco() { peso =(peso-  1).max(0) }
 	method gusto() { return frutilla }
 	method libreGluten() { return true }
 }
