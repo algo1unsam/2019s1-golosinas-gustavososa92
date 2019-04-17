@@ -3,6 +3,8 @@ import golosinas.*
 object mariano {
 
 	var golosinas = #{}
+	var golosinasDeseadas = #{}
+	var gustosDeseados = #{}
 
 	// para este objeto no damos pistas
 	// definimos algunos métodos para que compile el test
@@ -30,12 +32,12 @@ object mariano {
 
 	method preciosCuidados() {
 		/*preciosCuidados() : indica si todas las golosinas compradas tienen un precio menor o igual a 10 pesos. */
-		return golosinas.all({ golosina => golosina.precio() < 10 })
+		return golosinas.all({ golosina => golosina.precio() <= 10 })
 	}
 
 	method golosinaDeSabor(unSabor) {
 		/*golosinaDeSabor(unSabor) : devuelve la primer golosina que encuentra en la bolsa del sabor escogido. */
-		return golosinas.findOrElse({ golosina => golosina.gusto() == unSabor }, { null })
+		return golosinas.find({ golosina => golosina.gusto() == unSabor })
 	}
 
 	method golosinasDeSabor(unSabor) {
@@ -57,6 +59,18 @@ object mariano {
 		/*pesoGolosinas() : devuelve el peso de la bolsa de golosinas compradas, o sea, la suma del peso de cada golosina. */
 		return golosinas.sum({ golosina => golosina.peso() })
 	}
+
+	method agregarGustosDeseados(sabores) {
+		gustosDeseados.addAll(sabores)
+	}
+
+	method agregarGolosinasDeseadas(candy) {
+		golosinasDeseadas.addAll(candy)
+	}
+
+	method golosinasDeseadas() = golosinasDeseadas
+
+	method gustosDeseados() = gustosDeseados
 
 /*
  * Además, se deben contemplar dos situaciones relacionadas con Juliana, la pareja actual de Mariano.

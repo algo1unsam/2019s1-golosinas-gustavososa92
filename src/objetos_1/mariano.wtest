@@ -31,23 +31,37 @@ describe "tests de mariano" {
 		assert.equals(11, bombon.peso())
 	}
 
+	test "compro un alfajor y tiene que estar en la bolsa" {
+		mariano.comprar(alfajor)
+		assert.that(mariano.golosinas().contains(alfajor))
+	}
+
+	test "tiro el caramelo y ya no tiene que estar la bolsa" {
+		mariano.desechar(caramelo)
+		assert.notThat(mariano.golosinas().contains(caramelo))
+	}
+
 	test "hay libre de Gluten?" {
 		assert.that(mariano.hayGolosinaSinTACC())
 	}
 
-	test "NO todos los precios son menores que 10 pesos" {
-		assert.that(not mariano.preciosCuidados())
-		//lo cambie por el negado por que siempre me daba amarillo
+	test "al tener un precio mayor a 10 pesos los precios no son cuidados" {
+		assert.notThat(mariano.preciosCuidados())
+	// lo cambie p1or el negado por que siempre me daba amarillo
 	}
 
-	test "hay alguna golosina de sabor frutilla" {
-		var sabor = frutilla
-		assert.that(mariano.golosinaDeSabor(sabor) != null)
+	test "al tener el caramelo en la bolsa, tengo una golosina sabor frutilla" {
+		mariano.desechar(bombon)
+		assert.equals(caramelo, mariano.golosinaDeSabor(frutilla))
 	}
 
-	test "hay alguna golosina de sabor chocolate" {
+	test "si ninguna golosina es de vainilla explota " {
+		assert.throwsException({ mariano.golosinaDeSabor(vainilla)})
+	}
+
+	test "hay alguna golosina de sabor chocolate tiene que retornar chocolatin" {
 		var sabor = chocolate
-		assert.that(mariano.golosinaDeSabor(sabor) != null)
+		assert.equals(chocolatin, mariano.golosinaDeSabor(sabor))
 	}
 
 	test "golosinas de sabor frutilla tienen que ser caramelo y bombon" {
@@ -78,6 +92,18 @@ describe "tests de mariano" {
 	test "suma de todos los pesos tiene que ser 113(98+4+11) despues de 1 probada a la bolsa" {
 		mariano.probarGolosinas()
 		assert.equals(113, mariano.pesoGolosinas())
+	}
+
+	test "agrego gustos deseados frutilla y naranja y verifico" {
+		var gustos = #{ frutilla, naranja }
+		mariano.agregarGustosDeseados(gustos)
+		assert.equals(gustos, mariano.gustosDeseados())
+	}
+
+	test "agrego golosinas deseadas chupetin y alfajor y verifico" {
+		var candy = #{ chupetin, alfajor }
+		mariano.agregarGolosinasDeseadas(candy)
+		assert.equals(candy, mariano.golosinasDeseadas())
 	}
 
 }
