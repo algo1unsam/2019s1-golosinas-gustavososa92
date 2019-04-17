@@ -94,16 +94,33 @@ describe "tests de mariano" {
 		assert.equals(113, mariano.pesoGolosinas())
 	}
 
-	test "agrego gustos deseados frutilla y naranja y verifico" {
-		var gustos = #{ frutilla, naranja }
-		mariano.agregarGustosDeseados(gustos)
-		assert.equals(gustos, mariano.gustosDeseados())
+	/* estos test son cuando almaceno como los conjuntos de golosinas y gustos dentro de mariano
+	 * 	test "agrego gustos deseados frutilla y naranja y verifico" {
+	 * 		var gustos = #{ frutilla, naranja }
+	 * 		mariano.agregarGustosDeseados(gustos)
+	 * 		assert.equals(gustos, mariano.gustosDeseados())
+	 * 	}
+
+	 * 	test "agrego golosinas deseadas chupetin y alfajor y verifico" {
+	 * 		var candy = #{ chupetin, alfajor }
+	 * 		mariano.agregarGolosinasDeseadas(candy)
+	 * 		assert.equals(candy, mariano.golosinasDeseadas())
+	 } */
+	test "tengo actualmente 3 golosinas y desecho todo" {
+		mariano.desecharBolsa()
+		assert.that(mariano.golosinas().isEmpty())
 	}
 
-	test "agrego golosinas deseadas chupetin y alfajor y verifico" {
-		var candy = #{ chupetin, alfajor }
-		mariano.agregarGolosinasDeseadas(candy)
-		assert.equals(candy, mariano.golosinasDeseadas())
+	test "si golosinas deseadas #{alfajor, bombon, chupetin, oblea}, y tengo en la bolsa #{chocholatin,caramelo,bombon,alfajor} las que faltan son #{chupetin, oblea} " {
+		var deseadas = #{ alfajor, bombon, chupetin, oblea }
+		mariano.comprar(alfajor)
+		assert.equals(#{ chupetin, oblea }, mariano.golosinasFaltantes(deseadas))
+	}
+
+	test "si golosinas deseadas #{alfajor, bombon}, y tengo en la bolsa #{chocholatin,caramelo,bombon,alfajor} no falta ninguna " {
+		var deseadas = #{ alfajor, bombon }
+		mariano.comprar(alfajor)
+		assert.that(mariano.golosinasFaltantes(deseadas).isEmpty())
 	}
 
 }

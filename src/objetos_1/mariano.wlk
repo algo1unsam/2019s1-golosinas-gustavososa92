@@ -3,9 +3,21 @@ import golosinas.*
 object mariano {
 
 	var golosinas = #{}
-	var golosinasDeseadas = #{}
-	var gustosDeseados = #{}
 
+	/*esto es por si quiero guardar los conjuntos dentro de mariano (no hacia falta)
+	 * var golosinasDeseadas = #{}
+	 * var gustosDeseados = #{}
+	 * method agregarGustosDeseados(sabores) {
+	 * 	gustosDeseados.addAll(sabores)
+	 * }
+
+	 * method agregarGolosinasDeseadas(candy) {
+	 * 	golosinasDeseadas.addAll(candy)
+	 * }
+
+	 * method golosinasDeseadas() = golosinasDeseadas
+
+	 method gustosDeseados() = gustosDeseados*/
 	// para este objeto no damos pistas
 	// definimos algunos métodos para que compile el test
 	method comprar(golosina) {
@@ -16,6 +28,10 @@ object mariano {
 	method desechar(golosina) {
 		/*desechar(unaGolosina) : desecha la golosina escogida de la bolsa de golosinas. */
 		golosinas.remove(golosina)
+	}
+
+	method desecharBolsa() {
+		golosinas.clear()
 	}
 
 	method golosinas() = golosinas
@@ -60,26 +76,19 @@ object mariano {
 		return golosinas.sum({ golosina => golosina.peso() })
 	}
 
-	method agregarGustosDeseados(sabores) {
-		gustosDeseados.addAll(sabores)
+	method golosinasFaltantes(golosinasDeseadas) {
+		/*Lograr que a Mariano se le pueda preguntar golosinasFaltantes(golosinasDeseadas) , donde golosinasDeseadas es una colección de golosinas.
+		 * Debe devolver las golosinas que están entre las golosinasDeseadas, y que Mariano no compró.
+		 */
+		return golosinasDeseadas.difference(golosinas)
 	}
 
-	method agregarGolosinasDeseadas(candy) {
-		golosinasDeseadas.addAll(candy)
+	method gustosFaltantes(gustosDeseados) {
+	/*Lograr que a Mariano se le pueda preguntar gustosFaltantes(gustosDeseados), que es una consulta similar a la anterior,
+	 * pero donde gustosDeseados es una colección de gustos.
+	 *     Debe devolver los gustos que están entre los gustosDeseados, y que no están cubiertos por ninguna golosina de las que tiene Mariano.
+	 */
 	}
 
-	method golosinasDeseadas() = golosinasDeseadas
-
-	method gustosDeseados() = gustosDeseados
-
-/*
- * Además, se deben contemplar dos situaciones relacionadas con Juliana, la pareja actual de Mariano.
-
- *     Juliana critica a Mariano, pero siempre que puede le quita alguna golosina si es de las que a ella le gusta, y se enoja por las que faltan.
- *     Lograr que a Mariano se le pueda preguntar golosinasFaltantes(golosinasDeseadas) , donde golosinasDeseadas es una colección de golosinas. Debe devolver las golosinas que están entre las golosinasDeseadas, y que Mariano no compró.
- *     A veces Juliana tiene antojos por gustos gustos especiales.
- *     Lograr que a Mariano se le pueda preguntar gustosFaltantes(gustosDeseados), que es una consulta similar a la anterior, pero donde gustosDeseados es una colección de gustos.
- *     Debe devolver los gustos que están entre los gustosDeseados, y que no están cubiertos por ninguna golosina de las que tiene Mariano.
- */
 }
 
