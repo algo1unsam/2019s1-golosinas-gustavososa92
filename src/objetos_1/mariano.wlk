@@ -84,10 +84,11 @@ object mariano {
 	}
 
 	method gustosFaltantes(gustosDeseados) {
-	/*Lograr que a Mariano se le pueda preguntar gustosFaltantes(gustosDeseados), que es una consulta similar a la anterior,
-	 * pero donde gustosDeseados es una colección de gustos.
-	 *     Debe devolver los gustos que están entre los gustosDeseados, y que no están cubiertos por ninguna golosina de las que tiene Mariano.
-	 */
+		/*Lograr que a Mariano se le pueda preguntar gustosFaltantes(gustosDeseados), que es una consulta similar a la anterior,
+		 * pero donde gustosDeseados es una colección de gustos.
+		 *     Debe devolver los gustos que están entre los gustosDeseados, y que no están cubiertos por ninguna golosina de las que tiene Mariano.
+		 */
+		return gustosDeseados.difference(self.sabores())
 	}
 
 }

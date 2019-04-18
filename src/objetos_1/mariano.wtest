@@ -41,13 +41,17 @@ describe "tests de mariano" {
 		assert.notThat(mariano.golosinas().contains(caramelo))
 	}
 
-	test "hay libre de Gluten?" {
+	test "hay libre de Gluten? debe ser verdadero porque el bombon y el caramelo son sin TACC" {
 		assert.that(mariano.hayGolosinaSinTACC())
 	}
 
-	test "al tener un precio mayor a 10 pesos los precios no son cuidados" {
+	test "al tener un precio mayor a 10 pesos(precio chocolatin 50p) los precios no son cuidados" {
 		assert.notThat(mariano.preciosCuidados())
-	// lo cambie p1or el negado por que siempre me daba amarillo
+	}
+
+	test "si tengo solo el caramelo y el bombon los precios son cuidados" {
+		mariano.desechar(chocolatin)
+		assert.that(mariano.preciosCuidados())
 	}
 
 	test "al tener el caramelo en la bolsa, tengo una golosina sabor frutilla" {
@@ -65,15 +69,14 @@ describe "tests de mariano" {
 	}
 
 	test "golosinas de sabor frutilla tienen que ser caramelo y bombon" {
-		var sabor = frutilla
 		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
-		assert.that(mariano.golosinasDeSabor(sabor) == #{ caramelo, bombon })
+		assert.that(mariano.golosinasDeSabor(frutilla) == #{ caramelo, bombon })
 	}
 
-	test "golosinas de sabor chocolate tiene que ser chocolatin" {
-		var sabor = chocolate
+	test "ademas compro un alfajor, golosinas de sabor chocolate tiene que ser chocolatin y alfajor" {
+		mariano.comprar(alfajor)
 		// assert.notThat(mariano.golosinasDeSabor(sabor).isEmpty())
-		assert.that(mariano.golosinasDeSabor(sabor) == #{ chocolatin })
+		assert.that(mariano.golosinasDeSabor(chocolate) == #{ alfajor, chocolatin })
 	}
 
 	test "conjunto de sabores tiene que ser chocolate y frutilla" {
@@ -106,7 +109,7 @@ describe "tests de mariano" {
 	 * 		mariano.agregarGolosinasDeseadas(candy)
 	 * 		assert.equals(candy, mariano.golosinasDeseadas())
 	 } */
-	test "tengo actualmente 3 golosinas y desecho todo" {
+	test "tengo actualmente 3 golosinas y desecho todo, la bolsa queda vacia" {
 		mariano.desecharBolsa()
 		assert.that(mariano.golosinas().isEmpty())
 	}
@@ -121,6 +124,17 @@ describe "tests de mariano" {
 		var deseadas = #{ alfajor, bombon }
 		mariano.comprar(alfajor)
 		assert.that(mariano.golosinasFaltantes(deseadas).isEmpty())
+	}
+
+	test "si gustos deseados son #{chocolate, frutilla,vainilla,naranja}, y tengo en la bolsa #{chocholatin,caramelo,bombon} faltan vainilla y naranja " {
+		var deseados = #{ chocolate, frutilla, vainilla, naranja }
+		assert.equals(#{ vainilla, naranja }, mariano.gustosFaltantes(deseados))
+	}
+
+	test "si gustos deseados son #{chocolate, frutilla,naranja}, y tengo en la bolsa #{chocholatin,caramelo,bombon,chupetin} no falta ninguno " {
+		var deseados = #{ chocolate, frutilla, naranja }
+		mariano.comprar(chupetin)
+		assert.that(mariano.gustosFaltantes(deseados).isEmpty())
 	}
 
 }

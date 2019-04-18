@@ -1,0 +1,11 @@
+
+describe "test de bombon" {
+
+	var golosina = bombon
+
+	test "test del peso" {
+		assert.that(true)
+	}
+
+}
+
